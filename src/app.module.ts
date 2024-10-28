@@ -7,6 +7,7 @@ import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Song } from './songs/song.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
           username: configService.get<string>('PG_USERNAME'),
           password: configService.get<string>('PG_PASSWORD'),
           database: 'core-test',
-          entities: [],
+          entities: [Song],
           autoLoadEntities: true,
           // used in development
           // not to be used in production
