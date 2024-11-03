@@ -8,6 +8,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Song } from './songs/song.entity';
+import { Artist } from './artist/artist.entity';
+import { User } from './user/user.entity';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -24,7 +28,7 @@ import { Song } from './songs/song.entity';
           username: configService.get<string>('PG_USERNAME'),
           password: configService.get<string>('PG_PASSWORD'),
           database: 'core-test',
-          entities: [Song],
+          entities: [Song, Artist, User ],
           autoLoadEntities: true,
           // used in development
           // not to be used in production
@@ -49,7 +53,9 @@ import { Song } from './songs/song.entity';
     //   }),
     //   inject: [ConfigService]
     // }),
-    SongsModule],
+    SongsModule,
+    AuthModule,
+    UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
