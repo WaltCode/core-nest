@@ -3,9 +3,11 @@ import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
 import { Connection } from 'src/common/constants/connection';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Song } from './song.entity';
+import { Artist } from 'src/artist/artist.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature()],
+  imports: [TypeOrmModule.forFeature([Song, Artist])],
   controllers: [SongsController],
   providers: [
     // using standard providers technique
@@ -25,10 +27,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     // }
 
     // using non class provider
-    {
-      provide: 'CONNECTION',
-      useValue: Connection
-    }
+    // {
+    //   provide: 'CONNECTION',
+    //   useValue: Connection
+    // }
   ]
 })
 export class SongsModule {}
